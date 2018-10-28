@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Python Stock Profit Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href="style.css">
 </head>
 <body>
-    <h3>Compute Your Profit:</h3>
+
+<div class="jumbotron text-center">
+    <h3>Python Stock Profit Calculator</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h2>Compute Your Profit</h2>
+
     <form action="calculate_profit" method="POST">
         <p><label>Ticker Symbol:</label><input type="text" name="ticker"/></p>
         <p><label>Allotment:</label><input type="number" name="allot"/></p>
@@ -38,5 +51,8 @@
                 <p>{{ result['break_even'] }}</p>
 
     {% endif %}
+</div>
+    </div>
+</div>
 </body>
 </html>
