@@ -22,11 +22,11 @@
 
     <form action="calculate_profit" method="POST">
         <p><label>Ticker Symbol:</label><input type="text" name="ticker"/></p>
-        <p><label>Allotment:</label><input type="number" name="allot"/></p>
-        <p><label>Final Share Price:</label><input type="number" name="final_share"/></p>
-        <p><label>Sell Commission:</label><input type="number" name="sell_com"/></p>
-        <p><label>Initial Share Price:</label><input type="number" name="initial_share"/></p>
-        <p><label>Buy Commission:</label><input type="number" name="buy_com"/></p>
+        <p><label>Allotment:</label><input type="number" name="allot" step="0.1"/></p>
+        <p><label>Final Share Price:</label><input type="number" name="final_share" step="0.1"/></p>
+        <p><label>Sell Commission:</label><input type="number" name="sell_com" step="0.1"/></p>
+        <p><label>Initial Share Price:</label><input type="number" name="initial_share" step="0.1"/></p>
+        <p><label>Buy Commission:</label><input type="number" name="buy_com" step="0.1"/></p>
         <p><label>Capital Gain Tax Rate(%):</label><input type="number" name="capital" step="0.1"/></p>
         <p><input type="submit" value="Compute"/></p>
     </form>
