@@ -27,7 +27,7 @@
         <p><label>Sell Commission:</label><input type="number" name="sell_com"/></p>
         <p><label>Initial Share Price:</label><input type="number" name="initial_share"/></p>
         <p><label>Buy Commission:</label><input type="number" name="buy_com"/></p>
-        <p><label>Capital Gain Tax Rate(%):</label><input type="number" name="capital"/></p>
+        <p><label>Capital Gain Tax Rate(%):</label><input type="number" name="capital" step="0.1"/></p>
         <p><input type="submit" value="Compute"/></p>
     </form>
     {% if result %}
