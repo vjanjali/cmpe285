@@ -6,7 +6,6 @@ import datetime
 app = Flask(__name__)
 
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -61,8 +60,9 @@ def fin_info_calc():
 
         # set the system date
         now = datetime.datetime.now()
-        tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
-        output_dt = now.strftime("%c") + " " + tz_string
+        output_dt = now.strftime("%c") + "PST"
+        #tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
+        #output_dt = now.strftime("%c") + " " + tz_string
 
         return render_template('fin_info.html', output=output, output_name=output_name, output_dt=output_dt)
 
