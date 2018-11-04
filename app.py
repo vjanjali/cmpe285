@@ -53,8 +53,11 @@ def fin_info_calc():
 
             if 'Global Quote' in d:
                 out = d['Global Quote']
-                output_symbol = "(" + out['01. symbol'] + ")"
-                output_value = out['05. price'] + " " + out['09. change'] + " (" + out['10. change percent'] + ")"
+                if out:
+                    output_symbol = "(" + out['01. symbol'] + ")"
+                    output_value = out['05. price'] + " " + out['09. change'] + " (" + out['10. change percent'] + ")"
+                else:
+                    output_name = "Check if Symbol Entered is Correct"
             elif 'Note' in d:
                 output_value = "Limitation from API Source:" \
                                "The API call frequency is 5 calls per minute and 500 calls per day."
