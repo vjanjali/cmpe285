@@ -39,20 +39,11 @@
         <div class="col-sm-4">
                 <h4>Output</h4>
 
-                {% if output_dt %}
-            <p>{{ output_dt }}</p>
+                {% if result %}
+                <p>{{ result['output_dt'] }}</p>
+                <p>{{ result['output_name'] }} {{ result['output_symbol'] }}</p>
+                <p>{{ result['output_value'] }}</p>
                 {% endif %}
-                {% if output_name %}
-                <p>{{ output_name }}
-                {% endif %}
-                {% if output %}
-                    ( {{ output['01. symbol'] }} )</p>
-            <p>{{ output['05. price'] }} {{ output['09. change'] }} ( {{ output['10. change percent'] }} )</p>
-                {% else %}
-                {% endif %}
-            {% if response %}
-            <p>{{ response }}</p>
-            {% endif %}
 
 
         </div>
