@@ -25,7 +25,9 @@ def fin_info():
 @app.route('/fin_info_calc', methods=['POST'])
 def fin_info_calc():
     if request.method == 'POST':
-        output_name = {}
+        output_name = ''
+        output_symbol = ''
+        output_value = ''
         symbol = request.form['symbol']
 
         # get name
@@ -33,8 +35,9 @@ def fin_info_calc():
                               "&apikey=" + api_key)
 
         # check if symbol is present/correct
-        if r_name.status_code == 200:
-            nm = r_name.json()
+        nm = r_name.json()
+
+        if nm['bestMatches']:
             full_name = nm['bestMatches']
             if full_name:
                 for full in full_name:
@@ -46,26 +49,30 @@ def fin_info_calc():
             # get symbol
             r_value = requests.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol +
                         "&apikey=" + api_key)
-            if r_value.status_code == 200:
-                d = r_value.json()
-                if d['Global Quote']:
-                    output = d['Global Quote']
-                else:
-                    output = "No Data Found for this Symbol"
+            d = r_value.json()
+
+            if 'Global Quote' in d:
+                out = d['Global Quote']
+                output_symbol = "(" + out['01. symbol'] + ")"
+                output_value = out['05. price'] + " " + out['09. change'] + " (" + out['10. change percent'] + ")"
+            elif 'Note' in d:
+                output_value = "Limitation from API Source:" \
+                               "The API call frequency is 5 calls per minute and 500 calls per day."
             else:
-                response = Response(r_value.status_code)
-                return render_template('fin_info.html', response=response)
+                output_value = "Error in Capturing Data for this Symbol. Try Again."
         else:
-            response = Response(r_name.status_code)
-            return render_template('fin_info.html', response=response)
+            output_name = "Check if Symbol Entered is Correct"
 
         # set the system date
         now = datetime.datetime.now()
         output_dt = now.strftime("%c") + " " + "PST"
-        #tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
-        #output_dt = now.strftime("%c") + " " + tz_string
+        # tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
+        # output_dt = now.strftime("%c") + " " + tz_string
 
-        return render_template('fin_info.html', output=output, output_name=output_name, output_dt=output_dt)
+        result = {'output_symbol': output_symbol, 'output_value': output_value, 'output_name': output_name,
+                  'output_dt': output_dt}
+
+        return render_template('fin_info.html', result=result)
 
 
 @app.route('/calculate_profit', methods=['POST'])
