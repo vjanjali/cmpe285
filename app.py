@@ -48,7 +48,7 @@ def fin_info_calc():
                         "&apikey=" + api_key)
             if r_value.status_code == 200:
                 d = r_value.json()
-                if d:
+                if d['Global Quote']:
                     output = d['Global Quote']
                 else:
                     output = "No Data Found for this Symbol"
