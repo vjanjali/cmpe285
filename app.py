@@ -1,11 +1,70 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
+import requests
+from datetime import datetime
+import datetime
 
 app = Flask(__name__)
+
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+
+@app.route('/stock_calc')
+def stock_calc():
+    return render_template('stock_calc.html')
+
+
+@app.route('/fin_info')
+def fin_info():
+    return render_template('fin_info.html')
+
+
+@app.route('/fin_info_calc', methods=['POST'])
+def fin_info_calc():
+    if request.method == 'POST':
+        output_name = {}
+        symbol = request.form['symbol']
+
+        # get name
+        r_name = requests.get("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + symbol +
+                              "&apikey=" + api_key)
+
+        # check if symbol is present/correct
+        if r_name.status_code == 200:
+            nm = r_name.json()
+            full_name = nm['bestMatches']
+            if full_name:
+                for full in full_name:
+                    if '1.0000' in full['9. matchScore']:
+                        output_name = full['2. name']
+            else:
+                output_name = "Check if Symbol Entered is Correct"
+
+            # get symbol
+            r_value = requests.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol +
+                        "&apikey=" + api_key)
+            if r_value.status_code == 200:
+                d = r_value.json()
+                if d:
+                    output = d['Global Quote']
+                else:
+                    output = "No Data Found for this Symbol"
+            else:
+                response = Response(r_value.status_code)
+                return render_template('fin_info.html', response=response)
+        else:
+            response = Response(r_name.status_code)
+            return render_template('fin_info.html', response=response)
+
+        # set the system date
+        now = datetime.datetime.now()
+        tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
+        output_dt = now.strftime("%c") + " " + tz_string
+
+        return render_template('fin_info.html', output=output, output_name=output_name, output_dt=output_dt)
 
 
 @app.route('/calculate_profit', methods=['POST'])
@@ -34,7 +93,7 @@ def cal_profit():
                   'total_purchase': total_purchase}
         for k in result:
             result[k] = round(result[k], 2)
-        return render_template('index.html', result=result)
+        return render_template('stock_calc.html', result=result)
 
 
 if __name__ == '__main__':
