@@ -50,6 +50,9 @@
             <p>{{ output['05. price'] }} {{ output['09. change'] }} ( {{ output['10. change percent'] }} )</p>
                 {% else %}
                 {% endif %}
+            {% if response %}
+            <p>{{ response }}</p>
+            {% endif %}
 
 
         </div>
