@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Python Stock Profit Calculator</title>
+    <title>Welcome to Greybag</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -11,48 +11,17 @@
 </head>
 <body>
 
-<div class="jumbotron text-center">
-    <h3>Python Stock Profit Calculator</h3>
-</div>
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <h2>Compute Your Profit</h2>
-
-    <form action="calculate_profit" method="POST">
-        <p><label>Ticker Symbol:</label><input type="text" name="ticker"/></p>
-        <p><label>Allotment:</label><input type="number" name="allot" step="0.1"/></p>
-        <p><label>Final Share Price:</label><input type="number" name="final_share" step="0.1"/></p>
-        <p><label>Sell Commission:</label><input type="number" name="sell_com" step="0.1"/></p>
-        <p><label>Initial Share Price:</label><input type="number" name="initial_share" step="0.1"/></p>
-        <p><label>Buy Commission:</label><input type="number" name="buy_com" step="0.1"/></p>
-        <p><label>Capital Gain Tax Rate(%):</label><input type="number" name="capital" step="0.1"/></p>
-        <p><input type="submit" value="Compute"/></p>
-    </form>
-    {% if result %}
-    <h3>PROFIT REPORT:</h3>
-
-                <p>Proceeds</p>
-                <p>${{ result['proceeds'] }}</p>
-                <p>Cost</p>
-                <p>${{ result['cost'] }}</p>
-                <p>Cost details:</p>
-                <p>Total Purchase Price</p>
-                <p>{{ result['allot'] }} X ${{ result['init_share'] }} = {{ result['total_purchase'] }}</p>
-                <p>Buy Commission = {{ result['buy_com'] }}</p>
-                <p>Sell Commission = {{ result['sell_com'] }}</p>
-                <p>Tax on Capital Gain = {{ result['capital'] }}% of ${{ result['capital_cont'] }}</p>
-                <p>Net Profit</p>
-                <p>{{ result['net_profit'] }}</p>
-                <p>Return on Investment</p>
-                <p>{{ result['return_inv'] }}</p>
-                <p>To break even, you should have a final share price of</p>
-                <p>{{ result['break_even'] }}</p>
-
-    {% endif %}
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">CMPE 285 - Fall 2018</a>
     </div>
-</div>
+    <ul class="nav navbar-nav">
+      <li><a href="stock_calc">Python Stock Profit Calculator</a></li>
+      <li><a href="fin_info">Python Finance Info</a></li>
+    </ul>
+  </div>
+</nav>
+
 </body>
 </html>
