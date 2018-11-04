@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Python Stock Profit Calculator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel= "stylesheet" type= "text/css" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">CMPE 285 - Fall 2018</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="stock_calc">Python Stock Profit Calculator</a></li>
+      <li><a href="fin_info">Python Finance Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h3>Python Finance Info</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <form action="fin_info_calc" method="POST">
+                <h4>Input</h4>
+                <p><label>Stock Symbol:</label><input type="text" name="symbol"/></p>
+                <p><input type="submit" value="Submit"/></p>
+            </form>
+        </div>
+        <div class="col-sm-4">
+                <h4>Output</h4>
+
+                {% if output_dt %}
+            <p>{{ output_dt }}</p>
+                {% endif %}
+                {% if output_name %}
+                <p>{{ output_name }}
+                {% endif %}
+                {% if output %}
+                    ( {{ output['01. symbol'] }} )</p>
+            <p>{{ output['05. price'] }} {{ output['09. change'] }} ( {{ output['10. change percent'] }} )</p>
+                {% else %}
+                {% endif %}
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
