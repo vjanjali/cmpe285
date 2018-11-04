@@ -28,7 +28,7 @@ def fin_info_calc():
         output_name = ''
         output_symbol = ''
         output_value = ''
-        symbol = request.form['symbol']
+        symbol = request.form['symbol'].strip()
 
         # get name
         r_name = requests.get("https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=" + symbol +
