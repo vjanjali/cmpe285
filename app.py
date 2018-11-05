@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, Response
 import requests
 from datetime import datetime
 import datetime
+from pytz import timezone
+import pytz
 
 app = Flask(__name__)
 
@@ -67,8 +69,9 @@ def fin_info_calc():
             output_name = "Check if Symbol Entered is Correct"
 
         # set the system date
-        now = datetime.datetime.now()
-        output_dt = now.strftime("%c") + " " + "PST"
+        now = datetime.datetime.now(tz=pytz.utc)
+        date = now.astimezone(timezone('US/Pacific'))
+        output_dt = date.strftime("%c") + " " + "PST"
         # tz_string = datetime.datetime.now(datetime.timezone.utc).astimezone().tzname()
         # output_dt = now.strftime("%c") + " " + tz_string
 
